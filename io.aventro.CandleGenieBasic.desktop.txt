@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Candle Genie Basic
+Comment=The Pattern Training Lab for Smart Trading Bots
+Icon=io.aventro.CandleGenieBasic
+Exec=run-candlegenie
+Categories=Finance;Education;Science;
+StartupNotify=true
+Terminal=false

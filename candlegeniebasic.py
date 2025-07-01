@@ -23,7 +23,17 @@ def get_resource_path(filename):
         base_path = os.path.dirname(os.path.abspath(__file__))
     return os.path.join(base_path, filename)
 
-SPLASH_PATH = get_resource_path("logo.png")
+def get_splash_path():
+    flatpak_path = "/app/share/candlegenie/splash.png"
+    if os.path.exists(flatpak_path):
+        return flatpak_path
+    local_path = get_resource_path("splash.png")
+    if os.path.exists(local_path):
+        return local_path
+    fallback_path = get_resource_path("logo.png")
+    return fallback_path
+
+SPLASH_PATH = get_splash_path()
 
 CANDLE_PRESETS = {
     "short green candle": {
@@ -338,9 +348,6 @@ if __name__ == "__main__":
 
     class SplashScreen(tk.Toplevel):
         def __init__(self, parent, image_path, timeout=3000):
-            debug("SplashScreen.__init__() CALLED")
-            debug(f"DEBUG: Trying to load splash image from: {image_path}")
-            debug(f"DEBUG: Exists? {os.path.exists(image_path)}")
             super().__init__(parent)
             self.timeout = timeout
             self.overrideredirect(True)
